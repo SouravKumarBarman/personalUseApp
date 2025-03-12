@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import InputWithLabel from "@/components/InputWithLabel";
 import { useState } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Button } from "@rneui/base";
 
 export default function Index(): React.JSX.Element {
   const [totalBill, setTotalBill] = useState(0);
