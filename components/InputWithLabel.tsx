@@ -1,14 +1,15 @@
 import { Text, View } from "react-native"; // Import TextInput
 import { Input } from "@rneui/themed"; // Import Input
-import React, { useState } from "react"; // Import useState
+import React, { useEffect, useState } from "react"; // Import useState
 
 type Prop = {
     label: string;
     value?: number;
     onInputChange?: (value: number) => void;
+    resetTrigger?: boolean;
 }
 
-const InputWithLabel = ({ label, value, onInputChange }: Prop) => {
+const InputWithLabel = ({ label, value, onInputChange, resetTrigger }: Prop) => {
     const [inputValue, setInputValue] = useState(value ? value.toString() : '');
 
     const handleChange = (text: string) => { 
@@ -17,6 +18,14 @@ const InputWithLabel = ({ label, value, onInputChange }: Prop) => {
             onInputChange(Number(text));
         }
     };
+
+    useEffect(() => {
+        if (resetTrigger) {
+            setInputValue('');
+            onInputChange && onInputChange(0);
+        }
+    }
+    , [resetTrigger]);
 
     return (
             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
